@@ -27,6 +27,8 @@ As a developer, you are tasked with creating a treasure hunt game. The user will
 ### 👩‍💻 Developer Stretch Goals
 
 - As a developer, I have a well commented application.
+    - branch: board-game-tawn
+    - 
 - As a developer, I have well written README file with instructions on how to access my repository.
 - As a developer, my variables are all named semantically.
 - As a developer, I have refactored and efficient code.
