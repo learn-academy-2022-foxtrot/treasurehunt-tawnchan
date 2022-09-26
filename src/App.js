@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import Square from './components/Square'
 import "./App.css"
+import Square from './components/Square'
 
 const App = () => {
   const [board, setBoard] = useState([
@@ -18,7 +18,6 @@ const App = () => {
   const [bombLocation, setBombLocation] = useState(Math.floor(Math.random() * board.length))
 
   const handleGamePlay = (clickedSquare) => {
-    // makes a copy of the board in state so that we can modify it in this method
     let updateBoard = [...board]
     if(clickedSquare === treasureLocation) {
       updateBoard[clickedSquare] = "💎"
@@ -28,6 +27,26 @@ const App = () => {
       setBoard(updateBoard)
     } else {
       updateBoard[clickedSquare] = "🌴"
+
+    setBoard(updateBoard)
+    }
+  }
+
+  const handleReset = () => {
+    setBoard([
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ])
+    setTreasureLocation(Math.floor(Math.random() * board.length))
+    setBombLocation(Math.floor(Math.random() * board.length))
+  }
       setBoard(updateBoard)
     }
   }
@@ -40,6 +59,12 @@ const App = () => {
       <div className="board-game">
         {board.map((square, index) => {
           return (
+          <Square 
+          square={square} 
+          index={index} 
+          key={index}
+          handleGamePlay={handleGamePlay} />
+        )
             <Square
               square={square}
               index={index}
@@ -49,6 +74,7 @@ const App = () => {
           )
         })}
       </div>
+      <button onClick={handleReset}>Restart Game</button>
     </>
   )
 }
