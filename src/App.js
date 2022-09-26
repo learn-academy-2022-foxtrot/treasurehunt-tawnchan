@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Square from "./components/Square"
+import Square from './components/Square'
 import "./App.css"
 
 const App = () => {
@@ -14,35 +14,40 @@ const App = () => {
     "?",
     "?"
   ])
-
   const [treasureLocation, setTreasureLocation] = useState(Math.floor(Math.random() * board.length))
+  const [bombLocation, setBombLocation] = useState(Math.floor(Math.random() * board.length))
 
   const handleGamePlay = (clickedSquare) => {
+    // makes a copy of the board in state so that we can modify it in this method
     let updateBoard = [...board]
     if(clickedSquare === treasureLocation) {
-      updateBoard[clickedSquare] = '♛'
+      updateBoard[clickedSquare] = "💎"
+      setBoard(updateBoard)
+    } else if(clickedSquare === bombLocation) {
+      updateBoard[clickedSquare] = "💣"
       setBoard(updateBoard)
     } else {
-    updateBoard[clickedSquare] = '🌴'
-    setBoard(updateBoard)
+      updateBoard[clickedSquare] = "🌴"
+      setBoard(updateBoard)
     }
   }
 
-  console.log("treasureLocation", treasureLocation)
+  console.log("treasureLocation:", treasureLocation)
+  console.log("bombLocation:", bombLocation)
   return (
     <>
       <h1>Treasure Hunt Game</h1>
-      <div className = "board-game">
+      <div className="board-game">
         {board.map((square, index) => {
           return (
-          <Square square = {square}
-                  index = {index}
-                  key = {index}
-                  handleGamePlay = {handleGamePlay}
-                  />
+            <Square
+              square={square}
+              index={index}
+              key={index}
+              handleGamePlay={handleGamePlay}
+            />
           )
         })}
-
       </div>
     </>
   )
